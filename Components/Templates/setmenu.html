@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="C:\Users\User\Documents\projects\Book A Meal\ui\Static\setmenu.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body>
+  <nav class="navbar_open" style="display:none;z-index:2;width:40%;min-width:300px;background-color: rgba(190, 93, 25, 0.68)" id="mySidebar">
+  <a href="javascript:void(0)" onclick="sidenav_close()"
+  class="w3-bar-item w3-button"><h2>Close Menu</h2></a>
+  <a href="#food" onclick="sidenav_close()" class="w3-bar-item w3-button"><h2>Food</h2></a>
+  <a href="#about" onclick="sidenav_close()" class="w3-bar-item w3-button"><h2>About</h2></a>
+</nav>
+
+<!-- Top menu -->
+<div class="container" style="color: #4CAF50" >
+  <!--<div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">-->
+    <div style="left: -20px" onclick="sidenav_open()"><h1>☰<h1></div>
+    <div style="text-align: center;"><h2>Order</h2></div>
+</div>
+
+<table id="food">
+  <tr >
+    <th></th>
+    <th style="text-align: center"><h4>AVAILABLE OPTIONS</h4></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+   <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>Price</td>
+    <td><button>Add to Menu</td></button>
+  </tr>
+</table>
+
+</body>
+<script>
+// Script to open and close sidebar
+function sidenav_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function sidenav_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</html>
