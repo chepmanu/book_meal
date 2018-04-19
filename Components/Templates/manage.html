@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book A Meall</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="C:\Users\User\Documents\projects\Book A Meal\ui\Static\manage.css">
+<head>
+  <body>
+<div class="container">
+      <div class="main header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <div class="dropdown">
+    <button class="dropbtn">Views 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">View Orders</a>
+      <a href="#">View Meals</a>
+      <a href="#">Set A Menu</a>
+    </div>
+  </div> 
+          </ul>
+        </nav>
+        <h3 >Book a Meal</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>Manage your orders</h1>
+        <p class="lead">Add a new order to the menu or Delete an existing order or enven change an existing order</p>
+      </div>
+
+
+      <div class="grid-container">
+        <div class="grid-item">
+        <button class="button1"><h4>Add an Order</h4></button>
+          <p>Add a new non-existant order to the menu</p>
+          <div>
+            <form class="modification-form1">
+          <input type="text" placeholder="food item">
+          <input type="number" placeholder="price">
+          <button>Send Order</button>
+          
+          </form>
+          </div>
+          
+        </div>
+
+        <div class="grid-item">
+          <button class="button2" ><h4>Modify an order</h4></button>
+          <p>Modify an order that is already set.</p>
+          <div>
+            <form class="modification-form2">
+          <input type="text" placeholder="food item">
+          <input type="number" placeholder="frice">
+          <button>Modify order</button>
+          </form>
+          </div>
+        </div>
+
+          <div class="grid-item">
+          <button class="button3"><h4>Delete an order</h4></button>
+          <p>Remove an order from the menu</p>
+          <div>
+            <form class="modification-form3">
+          <input type="text" placeholder="food item">
+          <button>Send remove  Order</button>
+          
+          </div>
+          </div>
+
+         
+      </div>
+
+    </div> <!-- /container -->
+    <script type="text/javascript" src="C:\Users\User\Documents\projects\jqueryslider\jquery3.js"></script>
+  <script type="text/javascript">
+    $('.button1 ').click(function(){
+      $('.modification-form1').animate({height:"toggle", opacity:"toggle"}, "slow")
+    });
+
+    $('.button2 ').click(function(){
+      $('.modification-form2').animate({height:"toggle", opacity:"toggle"}, "slow")
+    });
+
+    $('.button3 ').click(function(){
+      $('.modification-form3').animate({height:"toggle", opacity:"toggle"}, "slow")
+    });
+  </script>
+</body>
+</html>
