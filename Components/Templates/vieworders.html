@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<title>View Orders</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="C:\Users\User\Documents\projects\Book A Meal\ui\Static\viewmenu.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+<body>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="navbar_open" style="display:none;z-index:2;width:40%;min-width:300px;background-color: rgba(190, 93, 25, 0.68)" id="mySidebar">
+  <a href="javascript:void(0)" onclick="sidenav_close()"
+  class="w3-bar-item w3-button"><h2>Close Menu</h2></a>
+  <a href="#food" onclick="sidenav_close()" class="w3-bar-item w3-button"><h2>Food</h2></a>
+  <a href="#about" onclick="sidenav_close()" class="w3-bar-item w3-button"><h2>About</h2></a>
+</nav>
+
+<!-- Top menu -->
+<div class="container" style="color: #4CAF50" >
+  <!--<div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">-->
+    <div style="left: -20px" onclick="sidenav_open()"><h1>☰<h1></div>
+    <div style="text-align: center;"><h2>Orders</h2></div>
+</div>
+  
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:30px;">
+
+  <!-- First Photo Grid-->
+  <div class="grid-container">
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Sandwich" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Steak" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Cherries" style="width:30%">
+      <h3>Food</h3>
+      <p>Price.</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Pasta and Wine" style="width:30%">
+      <h3>Food</h3>
+      <p>Price.</p>
+      <button id = "details_button"> Complete Order</button>
+    </div>
+  </div>
+  
+  <!-- Second Photo Grid-->
+  <div class="grid-container">
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Popsicle" style="width:30%">
+      <h3>Food</h3>
+      <p>Price.</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Salmon" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button"> Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Sandwich" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Croissant" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+  </div>
+  
+  <div class="grid-container">
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Sandwich" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Steak" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Cherries" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button">Complete Order</button>
+    </div>
+    <div class="food">
+      <img src="C:\Users\User\Documents\projects\Book A Meal/avatar.png.png" alt="Pasta and Wine" style="width:30%">
+      <h3>Food</h3>
+      <p>Price</p>
+      <button id = "details_button"> Complete Order</button>
+    </div>
+  </div>
+  
+  
+<!-- End page content -->
+</div>
+
+<script>
+// Script to open and close sidebar
+function sidenav_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function sidenav_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+</body>
+</html>
