@@ -1,0 +1,86 @@
+body{
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(foodbackground.jpg);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-repeat: repeat-y;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+  background-color: #F1F1F1 ;
+  padding: 10px;
+  left: 50px;
+  position: relative;
+  
+}
+.container {
+    position: relative;
+    background-color: rgba(190, 93, 25, 0.68);
+    left: 0px;
+    margin:auto;
+    border-radius: 10px;
+
+  }
+
+a{
+	color: #4CAF50;
+	text-decoration: none;
+}
+
+.container :hover {
+  top: -2px;
+  box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+}
+
+button {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #4CAF50;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	cursor: pointer;
+	border-radius: 10px;
+	width: 100px;
+	position: relative;
+  align-content: center;
+}
+button:hover,.form button:active{
+	background-color: #43A047;
+}
+
+#food {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    background-color: rgba(190, 93, 25, 0.68);
+    position: relative;
+    left: 350px;
+}
+
+
+#food td{
+    border: 0px ;
+    margin:  0 0 15px;
+  padding: 15px;
+
+}
+
+#food	 tr:nth-child(even){background-color: #f2f2f2;}
+
+#food	 tr:hover {background-color: #ddd;}
+
+#food	 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    vertical-align: top;
+}
