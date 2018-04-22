@@ -1,5 +1,5 @@
 body{
-  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(foodbackground.jpg);
+  background-color: rgb(215, 211, 233);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -81,6 +81,5 @@ button:hover,.form button:active{
     text-align: left;
     background-color: #4CAF50;
     color: white;
-    border-radius: 10px;
     vertical-align: top;
 }

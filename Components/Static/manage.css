@@ -1,6 +1,6 @@
 /* Space out content a bit */
 body{
-  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(foodbackground.jpg);
+  background-color: rgb(215, 211, 233);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -36,9 +36,10 @@ body{
   .container {
     width: 1000px;
     position: relative;
-    background-color: #4CAF50;
-    left: 0px;
-    margin: auto;
+    background-color:rgba(190, 93, 25, 0.68);
+    float: center;
+    margin:auto;
+    margin-top: -10px;
   }
 }
  .grid-container{}
@@ -68,6 +69,7 @@ body{
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
+    margin-bottom: 90px;
   }
 }
 ul {
@@ -185,7 +187,6 @@ form {
 form{
   position: relative;
   z-index: 1 ;
-  /*background-color: rgba(7, 40, 195, 0.8);*/
   background-color: #4CAF50;
   max-width: 360px;
   margin: 0 auto 100px;
@@ -194,11 +195,6 @@ form{
   border-radius: 10px;
   }
 
-  navbar {
-  overflow: hidden;
-  background-color: #333;
-  font-family: Arial;
-}
 
 /* Links inside the navbar */
 .navbar a {
@@ -263,28 +259,8 @@ form{
   display: block;
 }
 
-.table_class{
-  position: relative;
-  left: 100px;
-}
 
 .mainheader{
   background-color: red;
 }
-/*
 
-form .modification-form1{
-  display: none;
-
-}
-
-form .modification-form2{
-  display: none;
-
-}
-
-form .modification-form3{
-  display: none;
-
-}
-*/
