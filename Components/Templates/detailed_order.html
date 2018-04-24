@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<title>View Order</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../Static/viewmenu.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+<body>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="navbar_open" style="display:none;z-index:2;width:40%;min-width:300px;background-color: rgba(190, 93, 25, 0.68)" id="mySidebar">
+  <a href="javascript:void(0)" onclick="sidenav_close()"
+  class="w3-bar-item w3-button"><h2>Close Menu</h2></a>
+  <a href="./index.html"><h2>Home</h2></a>
+  <a href="./sign_in.html"><h2>Logout</h2></a>
+</nav>
+
+<!-- Top menu -->
+<div class="container" style="color: #4CAF50" >
+    <div style="left: -20px" onclick="sidenav_open()"><h1>☰<h1></div>
+    <div style="text-align: center;"><h2>Order</h2></div>
+</div>
+  
+<!-- !PAGE CONTENT! -->
+<div class="section">
+
+      
+    <div class="food">
+      <img   class="food_image" src="../images/f14.jpeg" alt="Popsicle" style="width:20%;border-radius: 10px;">
+  
+        <table id="food-grid">
+         
+      <tr>
+        <td>Food</td>
+        <td>Rice</td>
+      </tr>
+      <tr>
+        <td>Price</td>
+        <td>200</td>
+      </tr>
+  
+      <tr>
+        <td>Ordered By</td>
+        <td>Roland Mendel</td>
+        </tr>
+      <tr>
+        <td>Time Ordered</td>
+        <td>09:00 p.m</td>
+      </tr>
+
+
+
+  
+        </table>
+
+      <div style="position: relative;left: 100px">
+          <button style="position: relative;left: -110px" id = "finish_oder_button">Finish Order</button>
+      </div>
+</div>
+
+    </div>
+    
+  
+    
+  
+<!-- End page content -->
+</div>
+
+<script>
+// Script to open and close sidebar
+function sidenav_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function sidenav_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+</body>
+</html>

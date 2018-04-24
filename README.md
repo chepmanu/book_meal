@@ -1,4 +1,6 @@
-# book_meal
+# Book a Meal
+
+
 The site is for online meal booking for users and meal management for the caterers.
 1-The User Interface.
   -A home page for new visitors to the site.
@@ -7,3 +9,6 @@ The site is for online meal booking for users and meal management for the catere
   -Caterers should login to the manage page where they should manage meal options.
   -Caterers can view all orders in summary or an order in more details.
   -Caterers can set menu for a specific day basing on available meals from the day.
+
+Git pages :
+The link for this projects UI can be found at:https://chepmanu.github.io/book_meal/
