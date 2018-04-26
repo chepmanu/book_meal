@@ -2,116 +2,119 @@ import unittest
 import json
 import app
 
-BASE_URL = 'http://127.0.0.1:6500/api/v1/user/'
+BASE_URL = 'http://127.0.0.1:6500/api/v1/'
+
 
 class EndPointsTestCase(unittest.TestCase):
     """ Tests for all the api endpoints """
     def setUp(self):
         """ Initialize app and define test variables"""
+        app.testing=True
         self.app = app.app.test_client()
-        self.user = {"id":2, "name":"username", "password":"userpassword"}
-        self.meal2 = {"id":1, "food": "rice and beef", "price":450}
-        self.meal = {"id":2, "food":"spagheti", "price":250}
-        self.meals = {
-            'meal1':{
-                "id":3,
-                "food":"beef",
-                "price":300
-            },
-            'meal2':{
-                "id":4,
-                "food":"pasta",
-                "price":350
-            }
-        }
-        
-        self.orders = {
-            'order1':{
-                "id":3,
-                "food":"eggs",
-                "price":300
-            },
-            'order2':{
-                "id":4,
-                "food":"fries",
-                "price":350
-            }
-        }
+
+        self.user = {"username":"Larry", "password":"larrypage", "email":"larry@paw"}
+        self.meal = {"food":"githeri", "price":450, "id":1}
+        self.meal1 = {"food":"spagheti", "price":250, "id":2}
+        self.meal2 = {"food":"mutton", "price":500, "id":3}
+        self.orders = [{"food":"githeri", "price":450, "id":1},{"food":"spagheti", "price":250, "id":2}]
+        self.user1 = [{"username":"manu", "password":"manu0", "id":1}]
+        menu = [{"food":"githeri", "price":450, "id":1},{"food":"spagheti", "price":250, "id":2}]
 
 
-    def test_register_endpoint(self):
+
+
+    def test_signup(self):
         """ Test API endpoint can register a new user"""
-        response = self.app.post(BASE_URL+'/register', data=json.dumps(self.user),content_type='application/json')
+        response = self.app.post('/signup', data=json.dumps(self.user),content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
-    def test_login_endpoint(self):
-        """"Test API endpoint can login user"""
-        res = self.app.post(BASE_URL+'/login', data=json.dumps(self.user), content_type='application/json')
-        self.assertEqual(res.status_code, 200)
+    # def test_login_endpoint(self):
+    #     """"Test API endpoint can login user"""
+    #     res = self.app.post('/signin', data=json.dumps(self.user), content_type='application/json')
+    #     self.assertEqual(res.status_code, 200)
+    #     self.assertEqual(self.user['password'], 'larrypage')
+    #     self.assertAlmostEqual(self.user['username'], 'Larry')
+
+
+    
     
     def test_addmeal_endpoint(self):
         """ Test API endpoint can add meal"""
-        response = self.app.post(BASE_URL+'/caterer/add/{}'.format('id'), data=json.dumps(self.meal2), content_type='application/json')
-        self.assertEqual(response.status_code, 201)
+        response = self.app.post('/add_meal', data=json.dumps(self.meal), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        res = self.app.delete('/delete/1')
+        self.assertEqual(res.status_code, 200)
 
 
     def test_deletemeal_endpoint(self):
         """Test API endpoint can delete meal"""
-        res1 = self.app.post(BASE_URL+'/caterer/add/{}'.format('id'), data=json.dumps(self.meal2), content_type='applicatin/json')
-        self.assertEqual(res1.status_code, 201)
-        res = self.app.delete(BASE_URL+'/caterer/delete/1')
+        meal = {"food":"githeri", "price":450, "id":10}
+        response = self.app.post('/add_meal', data=json.dumps(meal), content_type='application/json')
+        res = self.app.delete('/delete/10')
         self.assertEqual(res.status_code, 200)
-        res = self.app.delete(BASE_URL+ '/1')
-        self.assertEqual(res.status_code, 404)
+
+         #Test to see if it exists, should return a 404
+        result = self.app.get('/meal/10')
+        self.assertEqual(result.status_code, 404)
+        
 
     def test_modifymeal_endpoint(self):
         """Test API endpoint can modify meal option """
-        self.meal1 = {"price":500}
-        response1 = self.app.put(BASE_URL+'/caterer/modify/3/', data=json.dumps(self.meal1), content_type='application/json')
-        self.assertEqual(response1.status_code, 200)
-        data = self.app.get(BASE_URL+'/meal/3/')
-        self.assertEqual(data["price"], 500)
+        response = self.app.post('/add_meal', data=json.dumps(self.meal), content_type='application/json')
+        response = self.app.put('/mordify_meal/1', data=json.dumps(self.meal2), content_type='application/json')
+    
+        self.assertEqual(response.status_code, 200)
+        req = self.app.get('/meal/1')
+        self.assertEqual(req.status_code, 200)
+        
 
 
     def test_getonemeal_endpoint(self):
-        res = self.app.get(BASE_URL+'/meal/3/')
-        self.assertEquals(res.status_code, 200)
-        data = json.loads(res.get_data())
-        self.assertIn('beef', data["food"])
+        """ Test API endpoint can get one meal given the meal id"""
+        rv = self.app.post('/add_meal', data=json.dumps(self.meal), content_type='application/json')
+        self.assertEqual(rv.status_code, 200)
+        result_in_json = json.loads(rv.get_data())
+        result = self.app.get('/meal/{}'.format(result_in_json['id']))
+        self.assertEqual(result.status_code, 200)
+        
+        
 
-
-    def test_getallmeals_endpoint(self):
-        req = self.app.get(BASE_URL+ '/catererer/meals/all/')
+    def test_getmeals_endpoint(self):
+        """Test API endpoint can get all meals"""
+        req = self.app.get('/meals/')
         self.assertEqual(req.status_code, 200)
-        self.assertIn('rice and beef', str(req.data))
+    
 
     def test_getmenu_endpoint(self):
-        req = self.app.get(BASE_URL+'/menu')
+        """Test API endpoint can get menu"""
+        req = self.app.get('/getmenu/')
         self.assertEqual(req.status_code, 200)
         data = json.loads(req.get_data())
+        print(data)
+        #self.assertEqual(req.status_code, 200)
+        self.assertIn('githeri', str(data))
+
+
+    def test_modifyorder_endpoint(self):
+        """Test API endpoint can modify order """
+        response = self.app.post('/add_meal', data=json.dumps(self.meal), content_type='application/json')
+        response = self.app.put('/orders/1', data=json.dumps(self.meal2), content_type='application/json')
+    
+        self.assertEqual(response.status_code, 200)
+        req = self.app.get('/meal/1')
         self.assertEqual(req.status_code, 200)
-        self.assertIn('pasta', str(data["food"]))
 
-    def test_selectmealfrommenu_endpoint(self):
-        res = self.app.get(BASE_URL+'/menu/')
-        self.assertEqual(res.status_code, 200)
-        res = self.app.post(BASE_URL+'/menu/1')
-        data = json.loads(res.get_data())
-        self.assertEqual(res.status_code, 200)
-        self.assertIn('rice and beef', data["food"])
-
-    def test_modifyorder_endpoints(self):
-        self.meal6 = {"food": "plantain"}
-        res = self.app.get(BASE_URL+'/order/3')
-        self.assertEqual(res.status_code, 200)
-        res = self.app.put(BASE_URL+'/order/3', data=json.dumps(self.meal6), content='application/json')
-        self.assertEqual(res.status_code, 400)
-
-    def test_getalloders_endpoint(self):
-        req = self.app.get(BASE_URL+'/caterer/orders/all')
+    def test_alloders_endpoint(self):
+        """ Test API endpoint can get all orders """
+        req = self.app.get('/orders')
         self.assertEqual(req.status_code, 200)
+
+    def test_getoneoder_endpoint(self):
+        """Test API endpoint can get one order"""
+        req = self.app.get('/selectorder/1')
         data = json.loads(req.get_data())
-        self.assertIn('fries', data["order2"])
+        self.assertEqual(req.status_code, 200)
+        self.assertIn('githeri', str(data))
 
 
 
