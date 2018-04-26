@@ -101,3 +101,4 @@ ENV/
 .mypy_cache/
 __pycache__
 .vscode/
+__init__.pyc
