@@ -1,8 +1,5 @@
 from flask import request, jsonify, abort, make_response
-
 import json
-import uuid
-import os
 import jwt
 
 import datetime
@@ -60,7 +57,7 @@ def add_meal():
     meal = Meal(food=food, price=price, id=id)
     meals.append(meal)
     #user.add_meal(meal)
-    return jsonify(meal.to_dict())
+    return jsonify(meal.to_dict()), 201
 
 #To get meal option by admin
 @app.route('/meals', methods=['GET'])

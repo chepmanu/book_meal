@@ -21,11 +21,10 @@ class EndPointsTestCase(unittest.TestCase):
         self.meal2 = {"food":"mutton", "price":500, "id":3}
         self.orders = [{"food":"githeri", "price":450, "id":1},{"food":"spagheti", "price":250, "id":2}]
         self.user1 = [{"username":"manu", "password":"manu0", "id":1}]
-        menu = [{"food":"githeri", "price":450, "id":1},{"food":"spagheti", "price":250, "id":2}]
+        # menu = [{"food":"githeri", "price":450, "id":1},{"food":"spagheti", "price":250, "id":2}]
 
         response = self.app.post('/signup', data=json.dumps(self.user),content_type='application/json')
         response = self.app.post('/signin', data=json.dumps(self.user_login),content_type='application/json')
-        print(response)
         self.token = json.loads(response.data).get('token')
 
 
@@ -48,7 +47,7 @@ class EndPointsTestCase(unittest.TestCase):
     def test_addmeal_endpoint(self):
         """ Test API endpoint can add meal"""
         response = self.app.post('/add_meal', data=json.dumps(self.meal), content_type='application/json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
         res = self.app.delete('/delete/1')
         self.assertEqual(res.status_code, 200)
 
@@ -57,6 +56,7 @@ class EndPointsTestCase(unittest.TestCase):
         """Test API endpoint can delete meal"""
         meal = {"food":"githeri", "price":450, "id":10}
         response = self.app.post('/add_meal', data=json.dumps(meal), content_type='application/json')
+        self.assertEqual(response.status_code, 201)
         res = self.app.delete('/delete/10')
         self.assertEqual(res.status_code, 200)
 
@@ -79,7 +79,7 @@ class EndPointsTestCase(unittest.TestCase):
     def test_getonemeal_endpoint(self):
         """ Test API endpoint can get one meal given the meal id"""
         rv = self.app.post('/add_meal', data=json.dumps(self.meal), content_type='application/json')
-        self.assertEqual(rv.status_code, 200)
+        self.assertEqual(rv.status_code, 201)
         result_in_json = json.loads(rv.get_data())
         result = self.app.get('/meal/{}'.format(result_in_json['id']))
         self.assertEqual(result.status_code, 200)
