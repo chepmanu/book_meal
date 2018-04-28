@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/chepmanu/book_meal.svg?branch=endpoints)](https://travis-ci.org/chepmanu/book_meal)
 # Book a Meal
 
 
