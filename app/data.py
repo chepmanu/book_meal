@@ -35,7 +35,7 @@ class Meal():
 order = []
 users = []
 meals = []
-menu = [{"food":"githeri", "price":450, "id":1},{"food":"spagheti", "price":250, "id":2}]
+menu = []
 default_order = Order(food='githeri',price=233,id=1)
 orders = [default_order]
 

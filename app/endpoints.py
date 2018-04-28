@@ -26,8 +26,8 @@ def signup():
     user = User(username=username, password=encrypted_password, email=email,is_admin=is_admin)
     users.append(user)
 
-    return jsonify({'token': generate_token(user.email)})
-
+    #return jsonify({'token': generate_token(user.email)})
+    return jsonify({"message":"successful sign up"})
 ##### During log in
 
 # Get username and password from request then login user if successfull
@@ -48,8 +48,9 @@ def login():
 
       
 ####### TO add a meal for a given user
-@app.route('/add_meal', methods=['POST'])
-def add_meal():
+@app.route('/meals', methods=['POST'])
+@token_required
+def add_meal(current_user):
     food = request.get_json().get('food')
     price = request.get_json().get('price')
     id = request.get_json().get('id')
@@ -70,10 +71,22 @@ def getmeals_endpoint(current_user):
     }
     return jsonify(meal_res)
 
-#update a meal option by admin
-@app.route('/mordify_meal/<int:id>', methods=['PUT'])
+#Select meal from menu
+@app.route('/meal/<int:id>', methods=['GET'])
+@token_required
+def get_meal(current_user, id):
+    for meal in meals:
+        if meal.id == id:
+            return jsonify(meal.to_dict()), 200
+    return abort(404)
 
-def mordify_meal(id):
+
+#update a meal option by admin
+@app.route('/meal/<int:id>', methods=['PUT'])
+@token_required
+def mordify_meal(current_user, id):
+    if not current_user.is_admin:
+        return jsonify({"message":"you must be an admin to perfom this operation", 'status':401}), 401
     new_food = request.get_json().get('food')
     new_price = request.get_json().get('price')
 
@@ -86,8 +99,11 @@ def mordify_meal(id):
     return abort(404)
 
 #Remove  A meal option
-@app.route('/delete/<int:id>', methods=['GET','DELETE'])
-def delete(id):
+@app.route('/meal/<int:id>', methods=['DELETE'])
+@token_required
+def delete(current_user, id):
+    if not current_user.is_admin:
+        return jsonify({"message":"you must be an admin to perfom this operation", 'status':401}), 401
     for i in meals:
         if i.id == id:
             meals.remove(i)
@@ -95,8 +111,11 @@ def delete(id):
     return jsonify({"message":"Item not found"}), 404
 
 #Set menu for a day
-@app.route('/setmenu', methods=['POST'])
-def setmenu():
+@app.route('/menu', methods=['POST'])
+@token_required
+def setmenu(current_user):
+    if not current_user.is_admin:
+        return jsonify({"message":"you must be an admin to perfom this operation", 'status':401}), 401
     food = request.get_json().get('food')
     price = request.get_json().get('price')
     id = request.get_json().get('id')
@@ -104,62 +123,75 @@ def setmenu():
     meal_res = {
         'meals':[meal.to_dict()  for meal in meals]
     }
-    if new_meal not in meal_res:
+    if new_meal.to_dict()  not in meal_res['meals']:
         return jsonify({"message":"Meal not available in system"})
-    menu.append(new_meal.to_dict())
-    return jsonify(menu)
+    else:
+        menu.append(new_meal)
+     
+    return jsonify({"message":"success"})
 
 #Get the menu for the day
-@app.route('/getmenu/', methods=['GET'])
-def getmenu_endpoint():
-    return jsonify(menu)
+@app.route('/menu', methods=['GET'])
+@token_required
+def getmenu_endpoint(current_user):
+    menu_res = {"menu":[meal.to_dict() for meal in menu]}
+    print(menu_res)
+    return jsonify(menu_res)
+
 
 #Select meal from menu
-@app.route('/meal/<int:id>', methods=['GET'])
-def meal(id):
-    for meal in meals:
+@app.route('/menu/<int:id>', methods=['GET'])
+@token_required
+def meal(current_user, id):
+    for meal in menu:
         if meal.id == id:
+            orders.append(meal)
             return jsonify(meal.to_dict()), 200
     return abort(404)
 
 
 #Get all orders
 @app.route('/orders')
-def allorders_endpoint():
+@token_required
+def allorders_endpoint(current_user):
+    if not current_user.is_admin:
+        return jsonify({"message":"you must be an admin to perfom this operation", 'status':401}), 401
+    print(orders)
     return jsonify({"orders":[order.to_dict() for order in orders]})
 
 #Modify an order
-@app.route('/orders/<int:id>', methods=['PUT'])
-def modifyorder_endpoint(id):
+@app.route('/order/<int:id>', methods=['PUT'])
+@token_required
+def modifyorder_endpoint(current_user, id):
     new_food = request.get_json().get('food')
     new_price = request.get_json().get('price')
-    new_id = request.get_json().get('id')
-    new_order = Order(food=new_food, price=new_price, id=new_id)
-    prev_order = []
-    #Findng the previous order by id provided in the route
-    for i in orders:
-        if i.id == id:
-            prev_order.append(i)
-    print(prev_order)
-    #Replacing the privious order with the new order
-    for i,item in enumerate(orders):
-        if item == prev_order[0]:
-            orders[i]=new_order.to_dict()
-    return jsonify(orders)
+    new_order = Order(food=new_food, price=new_price, id=id)
 
+    for order in orders:
+        if order.id == id:
+            order.food = new_food
+            order.price = new_price
+            return jsonify(new_order.to_dict()), 200
+
+    return abort(404)
 
 #Select order from orders
-@app.route('/selectorder/<int:id>', methods=['GET'])
-def getoneorder_endpoint(id):
+@app.route('/order/<int:id>', methods=['GET'])
+@token_required
+def getoneorder_endpoint(current_user, id):
+    if not current_user.is_admin:
+        return jsonify({"message":"you must be an admin to perfom this operation", 'status':401}), 401
     for i in orders:
         if i.id == id:
             order.append(i)
             return jsonify(i.to_dict())
     return abort(404)
 
-#update a meal option by admin
-@app.route('/mordify/<int:id>', methods=['PUT'])
-def mordify_order(id):
+@app.route('/order/<int:id>', methods=['PUT'])
+@token_required
+def mordify_order(current_user, id):
+    if not current_user.is_admin:
+        return jsonify({"message":"you must be an admin to perfom this operation", 'status':401}), 401
     new_food = request.get_json().get('food')
     new_price = request.get_json().get('price')
 
