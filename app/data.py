@@ -5,26 +5,26 @@ class User():
         self.password = password
         self.email = email
         self.is_admin = is_admin
-
+        self.id = id(self)
 
     def to_dict(self):
         return {"username":self.username, "password":self.password, "email":self.email}
       
       
 class Order():
-    def __init__(self, food, price, id):
-        self.food = food
-        self.price = price
-        self.id = id
+    def __init__(self, meal, user):
+        self.meal = meal
+        self.user = user
+        self.id = id(self)
 
     def to_dict(self):
-        return {"food":self.food, "price":self.price, "id":self.id} 
+        return {"user":self.user.to_dict(), "meal":self.meal.to_dict(), "id":self.id} 
       
 class Meal():
-    def __init__(self, food, price, id):
+    def __init__(self, food, price):
         self.food = food
         self.price = price
-        self.id = id
+        self.id = id(self)
 
     
     def to_dict(self):
@@ -36,8 +36,8 @@ order = []
 users = []
 meals = []
 menu = []
-default_order = Order(food='githeri',price=233,id=1)
-orders = [default_order]
+
+orders = []
 
 
 def verify_email(email):
