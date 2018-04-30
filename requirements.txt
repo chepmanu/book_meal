@@ -18,3 +18,4 @@ PyJWT==1.4.2
 pylint==1.8.4
 Werkzeug==0.14.1
 wrapt==1.10.11
+gunicorn 
