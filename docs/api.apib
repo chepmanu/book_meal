@@ -1,0 +1,281 @@
+/* FORMAT: 1A
+HOST: http://localhost/api/v1
+
+# Book A Meal api
+Book A Meal api docs.
+
+# Group Authenication
+
+## Authenication Collection [/auth]
+
+### Sign up user [POST /signup]
+User can sign up here
+
++ Request 
+    + Headers 
+         
+            Content-Type: application/json 
+    
+    + Attributes 
+        + username: username (string, required) - The username of the user 
+        + password: password (string, required) - The user password 
+        + email: email@mail.com (string,required) - User email
+        + admin: admin (string) - User Admin
+        
++ Response 201 (application/json) 
+    + Attributes 
+        + message: successfull signup 
+
+### Sign in user [POST /signin]
+User sign in 
+
++ Request 
+    + Headers 
+    
+            Content-Type: application/json 
+        
+    + Attributes 
+        + username: username (string, required) - The registered username 
+        + password: password (string, required) - The registered password 
+    
++ Response 200 (application/json) 
+    + Attributes 
+        + token: token(string) 
+
+
+
+
+# Group Meals
+
+## Meals  Collection [/meals] 
+
+### Add Meal [POST]
+Admin can add meal to the system
+
++ Request 
+    + Headers 
+       
+            Content-Type: application/json 
+            x-access-token: token 
+
+    + Attributes 
+        + food: food (string, required) - The meal name 
+        + price: 50 (number, required) - The meal price
+        + url: url (string) - The food image 
++ Response 201 (application/json)
+    + Attributes 
+        + food: food (string) 
+        + price: 230 (number) 
+        + id: 1234567 (number)
+
+
+### Get a list of meals Meal [GET]
+Admin can get all meals from  the system
+
++ Request 
+    + Headers 
+    
+            Content-Type: application/json 
+            x-access-token: token 
+
++ Response 200 (application/json)
+    + Attributes
+        + meals (array)
+            + (object
+                + food: food (string) 
+                + price: 50 (number) 
+                + id: 44456565 (number)
+
+
+## Meal Collection [/meal]
+
+### Get Meal [GET /meal/{id}]
+Admin adds a meal
+ */
+
++ Request 
+
+    + Headers 
+    
+            x-access-token: token 
+    
+    + Parameter 
+        + id: 14038787358 (number) - The id of the meal 
+
++ Response 200 (application/json)
+    + Attributes
+        + food: food (string) 
+        + price: 345 (number) 
+        + id: 546 (number)
+
+
+
+### Delete Meal [DELETE /meal/{id}]
+ Admin Deletes a meal 
+
++ Request 
+    + Headers
+    
+            x-access-token: token 
+
+    + Parameter 
+        + id: 14038787358 (number) - The id of the meal to delete
+
++ Response 200 (application/json)
+    + Attributes
+        + message: `meal deleted ` (string) 
+
+
+
+
+### Update Meal [PUT /meal/{id}]
+The Admin to update a meal 
+
++ Request 
+    + Headers
+    
+            x-access-token: token 
+            Content-Type: application/json
+
+    + Parameter 
+        + id: 14038787358 (number) - The id of the meal 
+
+    + Attributes
+        + food: food (string) 
+        + price: 345 (number) 
+
++ Response 200 (application/json)
+    + Attributes
+        + food: food (string) 
+        + price: 345 (number) 
+        + id: 555 (number)
+
+
+
+# Group Menu 
+
+
+## Menu Collection [/menu]
+
+### Get Menu List [GET]
+User gets the menu for the day
+
++ Request 
+    + Headers
+    
+            x-access-token: token 
+    
++ Response 200 (application/json)
+    + Attributes
+        + meals(array)
+            + (object)
+                + food: food (string) 
+                + price: 345 (number) 
+                + id: 7565654 (number)
+
+
+### Add Menu Item [POST]
+Admin can add a meal to the day's menu
+
++ Request 
+    + Headers 
+       
+            x-access-token: token 
+            Content-Type: application/json
+
+
+    + Attributes
+        + id: 24454 (string , required) - The id for the meal item to add to menu 
+
+    
++ Response 200 (application/json)
+    + Attributes
+        + menu (array)
+            + (object)
+                + food: food (string) 
+                + price: 345 (number) 
+                + id: 4554 (number)
+
+
+
+# Group Orders 
+
+## Orders Collection [/order]
+
+
+### Get Orders List [GET]
+Admin gets all the orders made
+
++ Request 
+    + Headers 
+        
+            x-access-token: token 
+    
++ Response 200 (application/json)
+    + Attributes
+        + orders (array)
+                + food: food (string) 
+                + price: 345 (number) 
+                + id: 32323 (number)
+
+           
+
+
+
+### Post Orders  [POST/{id}]
+User makes an order
+
++ Request 
+    + Headers 
+        
+            x-access-token: token 
+            Content-Type: application/json
+
+
+    + Attributes
+        + id: 24454 (string , required) - The id for the meal item to order 
+
+    
++ Response 201 (application/json)
+    + Attributes
+        + message: `Oder was created` (string)
+
+
+### Mordify Orders  [PUT/{id}]
+User modifies a created order. Option is time limited.
+
++ Request 
+    + Headers
+    
+            x-access-token: token 
+            Content-Type: application/json
+
+
+    + Attributes
+        + id: 24454 (string , required) - The id for the meal item to  replace by
+
+    
++ Response 201 (application/json)
+    + Attributes
+        + food: chapati (string)
+        + price: 50 (number)
+       
+### Get Order  [GET/{id}]
+Admin gets one particular order
+
++ Request 
+    + Headers 
+      
+            x-access-token: token 
+            Content-Type: application/json
+
+
+    + Attributes
+        + id: 24454 (string , required) - The id for the oder item to view 
+
+    
++ Response 201 (application/json)
+    + Attributes
+        + food: chapati
+        + price: 50
+        + user: username ``       
